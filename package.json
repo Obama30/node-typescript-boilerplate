@@ -15,19 +15,24 @@
     "test": "gulp transpileTS && LOGGER_DISABLED=1 NODE_ENV=test mocha --bail --recursive --sort --full-trace ./dist/test & jest --coverage"
      },
 
+  
   "jest": {
     "collectCoverageFrom": [
-      "**/*.js",
-      "!setup.js",
-      "!babel.config.js",
-      "!**/node_modules/**",
-      "!**/coverage/**"
+      "*.js"
     ],
-    "testEnvironment": "node",
-    "setupFiles": [
-      "<rootDir>/setup.js"
-    ]
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 100,
+        "branches": 100,
+        "functions": 100,
+        "lines": 100
+      }
+    }
   },
+
   "author": "",
   "license": "ISC",
   "dependencies": {
