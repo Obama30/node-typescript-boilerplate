@@ -11,9 +11,8 @@
     "findonly": "./test/lib/huntForTheOnlys.sh test || true",
     "findconsole": "./test/lib/huntForTheConsoles.sh test || true",
     "start": "gulp",
-    "test": "jest --coverage",
     "test:watch": "jest --watch",
-    "test": "gulp transpileTS && LOGGER_DISABLED=1 NODE_ENV=test mocha --bail --recursive --sort --full-trace ./dist/test"
+    "test": "gulp transpileTS && LOGGER_DISABLED=1 NODE_ENV=test mocha --bail --recursive --sort --full-trace ./dist/test & jest --covergare"
      },
 {
   "jest": {
