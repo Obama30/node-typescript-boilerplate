@@ -16,12 +16,9 @@
      },
 
   "jest": {
-    "collectCoverageFrom": [
-      "src/main/webapp/scripts/**/*.js"
-    ],
-    "coveragePathIgnorePatterns": [
-      "/node_modules/"
-    ],
+    "collectCoverageFrom": {
+      "*.js"
+    },
     "coverageThreshold": {
       "global": {
         "statements": 70,
