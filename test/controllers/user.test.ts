@@ -32,7 +32,7 @@ describe('UserController', function () {
 
 		it('should return 401 status for existing email', function (done) {
 			const testPassword = 'test-password'
-			RegisterUser(testPassword).then((user: User) => {
+			RegisterUser(testPassword).then((user) => {
 				const userPayload = { email: user.email, password: testPassword }
 				Agent.post('/register').send(userPayload).end(function (err: Error, res) {
 					expect(err).to.exist

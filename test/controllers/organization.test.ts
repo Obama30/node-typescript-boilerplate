@@ -22,7 +22,7 @@ describe('OrganizationController', function () {
 	describe('POST /organizations', function () {
 		it('should return 422 status for invalid payload', function (done) {
 			const orgPayload = { badParam: 'test' }
-			Agent.post('/organizations').send(orgPayload).end(function (err: Error, res) {
+			Agent.post('/organizations').send(orgPayload).end(function (err, res) {
 				expect(err).to.exist
 				expect(res).to.have.status(422)
 				done()
