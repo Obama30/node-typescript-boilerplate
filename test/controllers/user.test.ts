@@ -62,7 +62,7 @@ describe('UserController', function () {
 		})
 
 		it('should return 401 for a bad password', function (done) {
-			RegisterUser('some-password').then((user: User) => {
+			RegisterUser('some-password').then((user) => {
 				const userPayload = { email: user.email, password: 'other-password' }
 				Agent.post('/login').send(userPayload).end(function (err: Error, res) {
 					expect(res).to.have.status(401)

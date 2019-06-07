@@ -51,7 +51,7 @@ describe('OrganizationController', function () {
 
 	describe('GET /organizations', function () {
 		it('should successfully return the organizations payload', function (done) {
-			CreateOrganization().then((org: Organization) => {
+			CreateOrganization().then((org) => {
 				Agent.get('/organizations').send(org).end(function (err: Error, res) {
 					expect(res).to.have.status(200)
 					expect(res.body.length).to.eq(3)

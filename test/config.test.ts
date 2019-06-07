@@ -27,7 +27,7 @@ export const Agent = chai.request.agent(app)
 export const UnAuthorizedAgent = chai.request.agent(app)
 
 const userPass = Faker.internet.password()
-export let LoggedInUser: User
+export let LoggedInUser: User;
 
 import { createConnection, Connection, UseContainerOptions } from 'typeorm'
 import { connect } from 'tls'
