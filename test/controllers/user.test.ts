@@ -32,7 +32,7 @@ describe('UserController', function () {
 
 		it('should return 401 status for existing email', function (done) {
 			const testPassword = 'test-password'
-			RegisterUser(testPassword).then((user) => {
+			RegisterUser(testPassword).then((user: User) => {
 				const userPayload = { email: user.email, password: testPassword }
 				Agent.post('/register').send(userPayload).end(function (err, res) {
 					expect(err).to.exist
@@ -62,9 +62,9 @@ describe('UserController', function () {
 		})
 
 		it('should return 401 for a bad password', function (done) {
-			RegisterUser('some-password').then((user) => {
+			RegisterUser('some-password').then((user: User) => {
 				const userPayload = { email: user.email, password: 'other-password' }
-				Agent.post('/login').send(userPayload).end(function (err: Error, res) {
+				Agent.post('/login').send(userPayload).end(function (err, res) {
 					expect(res).to.have.status(401)
 					done()
 				})
@@ -75,7 +75,7 @@ describe('UserController', function () {
 			const testPassword = 'test-password'
 			RegisterUser(testPassword).then((user: User) => {
 				const userPayload = { email: user.email, password: testPassword }
-				Agent.post('/login').send(userPayload).end(function (err: Error, res) {
+				Agent.post('/login').send(userPayload).end(function (err, res) {
 					expect(res).to.have.status(201)
 					done(err)
 				})
@@ -85,7 +85,7 @@ describe('UserController', function () {
 
 	describe.skip('GET /users', function () {
 		it('should return 401 status for unauthorized user', function (done) {
-			UnAuthorizedAgent.get('/users').end(function (err: Error, res) {
+			UnAuthorizedAgent.get('/users').end(function (err, res) {
 				expect(err).to.exist
 				expect(res).to.have.status(401)
 				done()
@@ -93,7 +93,7 @@ describe('UserController', function () {
 		})
 
 		it('should return 404 status for not found user', function (done) {
-			Agent.get(`/users/10`).end(function (err: Error, res) {
+			Agent.get(`/users/10`).end(function (err, res) {
 				expect(err).to.exist
 				expect(res).to.have.status(404)
 				done()
@@ -102,7 +102,7 @@ describe('UserController', function () {
 
 		it('should return the correct user.', function (done) {
 			RegisterUser('some-password').then((user: User) => {
-				Agent.get(`/users/${user.id}`).end(function (err: Error, res) {
+				Agent.get(`/users/${user.id}`).end(function (err, res) {
 					expect(res).to.have.status(200)
 					done(err)
 				})
@@ -113,7 +113,7 @@ describe('UserController', function () {
 	describe('GET /users', function () {
 		it('should successfully return the organizations payload', function (done) {
 			CreateUser().then((user: User) => {
-				Agent.get('/users').send(user).end(function (err: Error, res) {
+				Agent.get('/users').send(user).end(function (err, res) {
 					expect(res).to.have.status(200)
 					expect(res.body.length).to.eq(6)
 					done(err)
@@ -124,7 +124,7 @@ describe('UserController', function () {
 
 	describe.skip('PUT /users', function () {
 		it('should return 401 status for unauthorized user', function (done) {
-			UnAuthorizedAgent.put('/users/10').send({}).end(function (err: Error, res) {
+			UnAuthorizedAgent.put('/users/10').send({}).end(function (err, res) {
 				expect(err).to.exist
 				expect(res).to.have.status(401)
 				done()
@@ -133,7 +133,7 @@ describe('UserController', function () {
 
 		it('should return 422 status for invalid payload', function (done) {
 			RegisterUser('some-password').then((user: User) => {
-				Agent.put(`/users/${user.id}`).send({}).end(function (err: Error, res) {
+				Agent.put(`/users/${user.id}`).send({}).end(function (err, res) {
 					expect(err).to.exist
 					expect(res).to.have.status(422)
 					done()
@@ -143,7 +143,7 @@ describe('UserController', function () {
 
 		it('should return 404 status for not found user', function (done) {
 			const payload = { firstName: 'New Name' }
-			Agent.put(`/users/555`).send(payload).end(function (err: Error, res) {
+			Agent.put(`/users/555`).send(payload).end(function (err, res) {
 				expect(err).to.exist
 				expect(res).to.have.status(404)
 				done()
@@ -152,7 +152,7 @@ describe('UserController', function () {
 
 		it('should return the user.', function (done) {
 			const payload = { firstName: 'New Name' }
-			Agent.put(`/users/${LoggedInUser.id}`).send(payload).end(function (err: Error, res) {
+			Agent.put(`/users/${LoggedInUser.id}`).send(payload).end(function (err, res) {
 				expect(res).to.have.status(200)
 				done(err)
 			})
@@ -161,7 +161,7 @@ describe('UserController', function () {
 
 	describe('DELETE /users', function () {
 		xit('should return 401 status for unauthorized user', function (done) {
-			UnAuthorizedAgent.del('/users/555').end(function (err: Error, res) {
+			UnAuthorizedAgent.del('/users/555').end(function (err, res) {
 				expect(err).to.exist
 				expect(res).to.have.status(401)
 				done()
@@ -169,7 +169,7 @@ describe('UserController', function () {
 		})
 
 		it('should return 404 status for not found user', function (done) {
-			Agent.del('/users/555').end(function (err: Error, res) {
+			Agent.del('/users/555').end(function (err, res) {
 				expect(err).to.exist
 				expect(res).to.have.status(404)
 				done()
@@ -178,7 +178,7 @@ describe('UserController', function () {
 
 		it('should successfully delete the user.', function (done) {
 			RegisterUser('some-password').then((user: User) => {
-				Agent.del(`/users/${user.id}`).end(function (err: Error, res) {
+				Agent.del(`/users/${user.id}`).end(function (err, res) {
 					expect(res).to.have.status(200)
 					done(err)
 				})
