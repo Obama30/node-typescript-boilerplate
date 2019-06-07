@@ -30,7 +30,7 @@ describe('OrganizationController', function () {
 		})
 
 		it('should return 401 status for existing name', function (done) {
-			CreateOrganization().then((org: Organization) => {
+			CreateOrganization().then((org) => {
 				const orgPayload = { name: org.name }
 				Agent.post('/organizations').send(orgPayload).end(function (err, res) {
 					expect(err).to.exist
@@ -51,7 +51,7 @@ describe('OrganizationController', function () {
 
 	describe('GET /organizations', function () {
 		it('should successfully return the organizations payload', function (done) {
-			CreateOrganization().then((org: Organization) => {
+			CreateOrganization().then((org) => {
 				Agent.get('/organizations').send(org).end(function (err, res) {
 					expect(res).to.have.status(200)
 					expect(res.body.length).to.eq(3)
@@ -71,7 +71,7 @@ describe('OrganizationController', function () {
 		})
 
 		it('should successfully return the organization payload corresponding to supplied id', function (done) {
-			CreateOrganization().then((org: Organization) => {
+			CreateOrganization().then((org) => {
 				Agent.get(`/organizations/${org.id}`).end(function (err, res) {
 					expect(res).to.have.status(200)
 					done(err)
@@ -82,7 +82,7 @@ describe('OrganizationController', function () {
 
 	describe('PUT /organizations/:organization_id', function () {
 		it('should return 422 status for invalid payload', function (done) {
-			CreateOrganization().then((organization: Organization) => {
+			CreateOrganization().then((organization) => {
 				Agent.put(`/organizations/${organization.id}`).send({}).end(function (err, res) {
 					expect(err).to.exist
 					expect(res).to.have.status(422)
@@ -92,7 +92,7 @@ describe('OrganizationController', function () {
 		})
 
 		it('should return organization', function (done) {
-			CreateOrganization().then((organization: Organization) => {
+			CreateOrganization().then((organization) => {
 				const newName = { name: 'newName' }
 				Agent.put(`/organizations/${organization.id}`).send(newName).end(function (err, res) {
 					expect(res).to.have.status(200)
@@ -121,7 +121,7 @@ describe('OrganizationController', function () {
 		})
 
 		it('should successfully delete organization with valid id and return a 200 status', function (done) {
-			CreateOrganization().then((org: Organization) => {
+			CreateOrganization().then((org) => {
 				Agent.del(`/organizations/${org.id}`).end(function (err, res) {
 					expect(res).to.have.status(200)
 					done()
@@ -130,4 +130,3 @@ describe('OrganizationController', function () {
 		})
 	})
 })
-

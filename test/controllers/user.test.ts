@@ -32,8 +32,8 @@ describe('UserController', function () {
 
 		it('should return 401 status for existing email', function (done) {
 			const testPassword = 'test-password'
-			RegisterUser(testPassword).then((user: User) => {
-				const userPayload = { email: user.email, password: testPassword }
+			RegisterUser(testPassword).then((user) => {
+				const userPayload = { email.email, password: testPassword }
 				Agent.post('/register').send(userPayload).end(function (err, res) {
 					expect(err).to.exist
 					expect(res).to.have.status(401)
@@ -62,8 +62,8 @@ describe('UserController', function () {
 		})
 
 		it('should return 401 for a bad password', function (done) {
-			RegisterUser('some-password').then((user: User) => {
-				const userPayload = { email: user.email, password: 'other-password' }
+			RegisterUser('some-password').then((user) => {
+				const userPayload = { email.email, password: 'other-password' }
 				Agent.post('/login').send(userPayload).end(function (err, res) {
 					expect(res).to.have.status(401)
 					done()
@@ -73,8 +73,8 @@ describe('UserController', function () {
 
 		it('should successfully authenticated a registered user', function (done) {
 			const testPassword = 'test-password'
-			RegisterUser(testPassword).then((user: User) => {
-				const userPayload = { email: user.email, password: testPassword }
+			RegisterUser(testPassword).then((user) => {
+				const userPayload = { email.email, password: testPassword }
 				Agent.post('/login').send(userPayload).end(function (err, res) {
 					expect(res).to.have.status(201)
 					done(err)
@@ -101,7 +101,7 @@ describe('UserController', function () {
 		})
 
 		it('should return the correct user.', function (done) {
-			RegisterUser('some-password').then((user: User) => {
+			RegisterUser('some-password').then((user) => {
 				Agent.get(`/users/${user.id}`).end(function (err, res) {
 					expect(res).to.have.status(200)
 					done(err)
@@ -112,7 +112,7 @@ describe('UserController', function () {
 
 	describe('GET /users', function () {
 		it('should successfully return the organizations payload', function (done) {
-			CreateUser().then((user: User) => {
+			CreateUser().then((user) => {
 				Agent.get('/users').send(user).end(function (err, res) {
 					expect(res).to.have.status(200)
 					expect(res.body.length).to.eq(6)
@@ -132,7 +132,7 @@ describe('UserController', function () {
 		})
 
 		it('should return 422 status for invalid payload', function (done) {
-			RegisterUser('some-password').then((user: User) => {
+			RegisterUser('some-password').then((user) => {
 				Agent.put(`/users/${user.id}`).send({}).end(function (err, res) {
 					expect(err).to.exist
 					expect(res).to.have.status(422)
@@ -177,7 +177,7 @@ describe('UserController', function () {
 		})
 
 		it('should successfully delete the user.', function (done) {
-			RegisterUser('some-password').then((user: User) => {
+			RegisterUser('some-password').then((user) => {
 				Agent.del(`/users/${user.id}`).end(function (err, res) {
 					expect(res).to.have.status(200)
 					done(err)
@@ -186,3 +186,4 @@ describe('UserController', function () {
 		})
 	})
 })
+
