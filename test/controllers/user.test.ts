@@ -54,7 +54,7 @@ describe('UserController', function () {
 	describe('POST /login', function () {
 		it('should return 400 status for invalid payload', function (done) {
 			const badPayload = { badParam: 'test' }
-			Agent.post('/login').send(badPayload).end(function (err: Error, res) {
+			Agent.post('/login').send(badPayload).end(function (err, res) {
 				expect(err).to.exist
 				expect(res).to.have.status(400)
 				done()

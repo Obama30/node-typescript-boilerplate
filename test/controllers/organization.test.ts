@@ -42,7 +42,7 @@ describe('OrganizationController', function () {
 
 		it('should successfully return the created organization payload', function (done) {
 			const org = NewOrganization()
-			Agent.post('/organizations').send(org).end(function (err: Error, res) {
+			Agent.post('/organizations').send(org).end(function (err, res) {
 				expect(res).to.have.status(201)
 				done(err)
 			})

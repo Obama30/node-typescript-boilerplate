@@ -17,8 +17,8 @@ import "reflect-metadata";
  * Flagging app start and exit
  */
 Logger.info(`Node Process Started`)
-process.on('exit', (code: number) => {
-	Logger.info(`About to exit process with code: ${code}`)
+process.on('exit', (1) => {
+	Logger.info(`About to exit process with code: 1`)
 })
 
 /** The server. */
