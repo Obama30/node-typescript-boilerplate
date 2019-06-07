@@ -32,7 +32,7 @@ describe('OrganizationController', function () {
 		it('should return 401 status for existing name', function (done) {
 			CreateOrganization().then((org) => {
 				const orgPayload = { name: org.name }
-				Agent.post('/organizations').send(orgPayload).end(function (err: Error, res) {
+				Agent.post('/organizations').send(orgPayload).end(function (err, res) {
 					expect(err).to.exist
 					expect(res).to.have.status(401)
 					done()

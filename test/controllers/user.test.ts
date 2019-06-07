@@ -44,7 +44,7 @@ describe('UserController', function () {
 
 		it('should successfully return the created user payload', function (done) {
 			const creds = NewUser()
-			Agent.post('/register').send(creds).end(function (err: Error, res) {
+			Agent.post('/register').send(creds).end(function (err, res) {
 				expect(res).to.have.status(201)
 				done(err)
 			})
